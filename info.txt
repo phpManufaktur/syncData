@@ -1,0 +1,39 @@
+syncData
+(c) 2011 by phpManufaktur
+Ralf Hertsch, Stockholmer Str. 31, 13359 Berlin (Germany)
+http://phpManufaktur.de - ralf.hertsch@phpManufaktur.de
+
+Release 0.16
+2011-09-07
+fixed: missing set_time_limit() let running class.synchronize.php into a timeout.
+
+Release 0.15
+- not published -
+
+Release 0.14
+2011-09-06
+fixed: some typos in DE language file
+added: droplet sync_client for synchronize local installations with an server
+
+Release 0.13
+2011-09-02
+fixed: restore process expects always tables and files for restore and causes an error if there is nothing to do
+changed: some typos in DE language file
+
+Release 0.12
+2011-09-01
+fixed: at the backup finish message the download link does not work (missing *.zip extension)
+changed: method of embedding helper classes dbConnect_LE, kitTools and Dwoo if they are not installed
+changed: general code fixing and cleanup
+fixed: problem comparing files and tables stored from a linux system with files and tables on a windows system 
+
+Release 0.11
+2011-08-26
+fixed: fallback for dbConnect_LE does not work
+fixed: using referencing in function calls
+added: AutoExec function enables syncData to continue processes automatically
+fixed: Restore does not initialize proper if no backup archive exists
+
+Release 0.10
+2011-08-25
+First Beta Release

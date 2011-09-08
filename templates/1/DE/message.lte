@@ -1,0 +1,16 @@
+{*
+ * syncData
+ *
+ * @author Ralf Hertsch (ralf.hertsch@phpmanufaktur.de)
+ * @link http://phpmanufaktur.de
+ * @copyright 2011
+ * @license GNU GPL (http://www.gnu.org/licenses/gpl.html)
+ * @version $Id$
+ *}
+
+<div class="sync_dialog">
+  <h1>syncData Verbindung</h1>
+  <div class="sync_message">
+    {$message}
+  </div>
+</div>

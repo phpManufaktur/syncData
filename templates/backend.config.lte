@@ -1,0 +1,55 @@
+{*
+ * syncData
+ *
+ * @author Ralf Hertsch (ralf.hertsch@phpmanufaktur.de)
+ * @link http://phpmanufaktur.de
+ * @copyright 2011
+ * @license GNU GPL (http://www.gnu.org/licenses/gpl.html)
+ * @version $Id: backend.config.lte 15 2011-08-26 14:01:12Z phpmanufaktur $
+ *}
+<div id="sync_data_config">
+  <form name="{$form_name}" action="{$form_action}" method="post">
+    <input type="hidden" name="{$action_name}" value="{$action_value}" />
+    <input type="hidden" name="{$items_name}" value="{$items_value}" />
+    <h2>{$head}</h2>
+    <div class="{if $is_message == 1}message{else}intro{/if}">{$intro}</div>
+    <table width="100%">
+      <colgroup>
+        <col width="200" /> 
+        <col width="*" />
+        <col width="300" />
+      </colgroup>
+      <tr>
+        <th>{$header.identifier}</th>
+        <th>{$header.value}</th>
+        <th>{$header.description}</th>
+      </tr>
+      {foreach $items item}
+      <tr>
+        <td class="sync_cfg_identifier">{$item.identifier}</td>
+        {if $item.type == 'LIST'}
+        <td class="sync_cfg_value"><textarea name="{$item.name}">{$item.value}</textarea></td>
+        {elseif $item.field == "cfgServerArchiveID"}
+        <td class="sync_cfg_value">
+          <select name="{$item.name}" size="1">
+            {foreach $item.value option}
+            <option value="{$option.value}"{if $option.selected == 1} selected="selected"{/if}>{$option.text}</option>
+            {/foreach}
+          </select>
+        </td>
+        {else}
+        <td class="sync_cfg_value"><input type="text" name="{$item.name}" value="{$item.value}" /></td>
+        {/if}
+        <td class="sync_cfg_description">{$item.description}</td>
+      </tr>
+      {/foreach}
+      <tr><td colspan="3">&nbsp;</td></tr>
+      <tr>
+        <td colspan="3">
+          <input type="submit" value="{$btn_ok}" />&nbsp;
+          <input type="button" value="{$btn_abort}" onclick="javascript: window.location = '{$abort_location}'; return false;" />
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>

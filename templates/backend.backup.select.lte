@@ -1,0 +1,39 @@
+{*
+ * syncData
+ *
+ * @author Ralf Hertsch (ralf.hertsch@phpmanufaktur.de)
+ * @link http://phpmanufaktur.de
+ * @copyright 2011
+ * @license GNU GPL (http://www.gnu.org/licenses/gpl.html)
+ * @version $Id: backend.backup.select.lte 15 2011-08-26 14:01:12Z phpmanufaktur $
+ *}
+<div id="sync_data_backup">
+  <form name="{$form.name}" action="{$form.link}" method="post">
+    <input type="hidden" name="{$form.action.name}" value="{$form.action.value}" />
+    <h2>{$head}</h2>
+    <div class="{if $is_intro == 1}intro{else}message{/if}">{$intro}</div>
+    <table width="100%">
+      <colgroup>
+        <col width="200" /> 
+        <col width="*" />
+        <col width="300" />
+      </colgroup>
+      <tr>
+        <td>{$backup.label}</td>
+        <td>
+          <select name="{$backup.name}">
+            {foreach $backup.options option}
+            <option value="{$option.value}"{if $option.selected == 1} selected="selected"{/if} >{$option.text}</option>
+            {/foreach}
+          </select>
+        </td>
+        <td>{$backup.hint}</td>
+      </tr>
+      <tr><td colspan="2">&nbsp;</td></tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td colspan="2"><input type="submit" value="{$form.btn.ok}" /></td>
+      </tr>
+    </table>
+  </form>
+</div>

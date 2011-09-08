@@ -1,0 +1,30 @@
+dbConnect_LE
+(c) 2008 - 2011 by phpManufaktur
+Ralf Hertsch, Stockholmer Str. 31, 13359 Berlin (Germany)
+http://phpManufaktur.de - ralf.hertsch@phpManufaktur.de
+
+Release 0.65
+2011-07-20
+Added: setAutoIncrement() to set start value of TABLE AUTO_INCREMENT
+Grant compatibillity for LEPTON CMS
+
+0.64
+2011-02-18
+Clean up code and fixed some minor problems
+
+0.63
+2010-11-21
+Added: function sqlFoundRows() - executing FOUND_ROWS()
+
+0.62
+2010-10-24
+Fixed: class dbConnectLE called some language constants of dbConnect
+
+0.61
+2010-10-17
+Added global search feature for WebsiteBaker modules and addons
+Clean up code and create documentation with phpDocumentor
+
+0.60
+2010-10-16
+First release - ported from dbConnect Release 0.36 

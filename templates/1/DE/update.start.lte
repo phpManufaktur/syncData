@@ -1,0 +1,26 @@
+{*
+ * syncData
+ *
+ * @author Ralf Hertsch (ralf.hertsch@phpmanufaktur.de)
+ * @link http://phpmanufaktur.de
+ * @copyright 2011
+ * @license GNU GPL (http://www.gnu.org/licenses/gpl.html)
+ * @version $Id$
+ *}
+
+ 
+<div class="sync_dialog">
+  <div id="process">
+    <div id="process_left">
+      <img src="{$img_url}loading.gif" widht="100" height="100" alt="running..." />
+    </div>
+    <div id="process_right">
+      Bitte warten Sie, während die Aktualisierungen installiert werden ...
+    </div>
+  </div>
+  <div id="sync_message">
+    <h1>syncData Verbindung</h1>
+    <p>Die Aktualisierungsdatei wurde erfolgreich vom syncData Server übertragen und geprüft.</p>
+    <p><a href="{$action_link}" onclick="document.getElementById('process').style.display='block'; document.getElementById('sync_message').style.display='none';return true;">Aktualisierung installieren</a>.</p>
+  </div>
+</div>
