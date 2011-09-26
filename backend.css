@@ -64,15 +64,19 @@ textarea
   display: none;
   border: 1px solid #800000;
   background-color: #ffffdd;
-  padding: 15px;
+  padding: 0;
   margin: 20px 0 10px 0;
   font-size: 8pt;
+  min-height: 100px;
 }
 #process_left {
   float:left;
-  width: 50px;
+  width: 100px;
   min-height: 100px;
-  padding: 10px 0 0 0;
+  padding: 0;
+}
+#process_right {
+  padding: 20px 0 0 0;
 }
 #restore_form,
 #backup_form {
