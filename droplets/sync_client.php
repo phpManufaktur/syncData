@@ -15,7 +15,6 @@ if (file_exists(WB_PATH.'/modules/sync_data/class.synchronize.php')) {
 	$params = $client->getParams();
 	$params[syncClient::param_preset] = (isset($preset)) ? (int) $preset : 1;
 	$params[syncClient::param_css] = (isset($css) && (strtolower($css) == 'false')) ? false : true;
-	$params[syncClient::param_server] = (isset($server)) ? strtolower($server) : ''; 
 	if (!$client->setParams($params)) return $client->getError();
 	return $client->action();
 }

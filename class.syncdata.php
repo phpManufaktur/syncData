@@ -12,23 +12,14 @@
  * FOR VERSION- AND RELEASE NOTES PLEASE LOOK AT INFO.TXT!
   */
 
-// try to include LEPTON class.secure.php to protect this file and the whole CMS!
-if (defined('WB_PATH')) {	
-	if (defined('LEPTON_VERSION')) include(WB_PATH.'/framework/class.secure.php');
-} elseif (file_exists($_SERVER['DOCUMENT_ROOT'].'/framework/class.secure.php')) {
-	include($_SERVER['DOCUMENT_ROOT'].'/framework/class.secure.php'); 
-} else {
-	$subs = explode('/', dirname($_SERVER['SCRIPT_NAME']));	$dir = $_SERVER['DOCUMENT_ROOT'];
-	$inc = false;
-	foreach ($subs as $sub) {
-		if (empty($sub)) continue; $dir .= '/'.$sub;
-		if (file_exists($dir.'/framework/class.secure.php')) { 
-			include($dir.'/framework/class.secure.php'); $inc = true;	break; 
-		} 
-	}
-	if (!$inc) trigger_error(sprintf("[ <b>%s</b> ] Can't include LEPTON class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
+// include LEPTON class.secure.php to protect this file and the whole CMS!
+$class_secure = '../../framework/class.secure.php';
+if (file_exists($class_secure)) {
+	include($class_secure);
 }
-// end include LEPTON class.secure.php
+else {
+	trigger_error(sprintf("[ <b>%s</b> ] Can't include LEPTON class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
+}
 
 class dbSyncDataCfg extends dbConnectLE {
 	
@@ -82,6 +73,7 @@ class dbSyncDataCfg extends dbConnectLE {
   const cfgAutoExecMSec					= 'cfgAutoExecMSec';
   const cfgServerActive					= 'cfgServerActive';
   const cfgServerArchiveID			= 'cfgServerArchiveID';
+  const cfgServerURL						= 'cfgServerURL';
   
   public $config_array = array(
   	array('sync_label_cfg_max_execution_time', self::cfgMaxExecutionTime, self::type_integer, '30', 'sync_desc_cfg_max_execution_time'),
@@ -93,7 +85,8 @@ class dbSyncDataCfg extends dbConnectLE {
   	array('sync_label_cfg_filemtime_diff_allowed', self::cfgFileMTimeDiffAllowed, self::type_integer, '1', 'sync_desc_cfg_filemtime_diff_allowed'),
   	array('sync_label_cfg_auto_exec_msec', self::cfgAutoExecMSec, self::type_integer, '5000', 'sync_desc_cfg_auto_exec_msec'),
   	array('sync_label_cfg_server_active', self::cfgServerActive, self::type_boolean, '0', 'sync_desc_cfg_server_active'), 
-  	array('sync_label_cfg_server_archive_id', self::cfgServerArchiveID, self::type_string, '', 'sync_desc_cfg_server_archive_id') 
+  	array('sync_label_cfg_server_archive_id', self::cfgServerArchiveID, self::type_string, '', 'sync_desc_cfg_server_archive_id'),
+  	array('sync_label_cfg_server_url', self::cfgServerURL, self::type_string, '', 'sync_desc_cfg_server_url') 
   );  
   
   public function __construct($createTables = false) {

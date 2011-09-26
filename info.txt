@@ -3,6 +3,16 @@ syncData
 Ralf Hertsch, Stockholmer Str. 31, 13359 Berlin (Germany)
 http://phpManufaktur.de - ralf.hertsch@phpManufaktur.de
 
+Release 0.50
+2011-09-26
+published: first syncData beta release for LEPTON CMS
+
+Release 0.17
+2011-09-26
+changed: no longer use the param "server" in the droplet [[sync_client]] to 
+         avoid problems while replacing URL's in the content. Tell the client 
+         the server address (URL) now in the backend configuration.
+
 Release 0.16
 2011-09-07
 fixed: missing set_time_limit() let running class.synchronize.php into a timeout.
@@ -17,15 +27,19 @@ added: droplet sync_client for synchronize local installations with an server
 
 Release 0.13
 2011-09-02
-fixed: restore process expects always tables and files for restore and causes an error if there is nothing to do
+fixed: restore process expects always tables and files for restore and causes 
+       an error if there is nothing to do
 changed: some typos in DE language file
 
 Release 0.12
 2011-09-01
-fixed: at the backup finish message the download link does not work (missing *.zip extension)
-changed: method of embedding helper classes dbConnect_LE, kitTools and Dwoo if they are not installed
+fixed: at the backup finish message the download link does not work (missing 
+       *.zip extension)
+changed: method of embedding helper classes dbConnect_LE, kitTools and Dwoo if 
+         they are not installed
 changed: general code fixing and cleanup
-fixed: problem comparing files and tables stored from a linux system with files and tables on a windows system 
+fixed: problem comparing files and tables stored from a linux system with files 
+       and tables on a windows system 
 
 Release 0.11
 2011-08-26

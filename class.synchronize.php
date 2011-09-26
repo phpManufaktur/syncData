@@ -9,29 +9,19 @@
  * @version $Id$
  */ 
 
-// try to include LEPTON class.secure.php to protect this file and the whole CMS!
-if (defined('WB_PATH')) {	
-	if (defined('LEPTON_VERSION')) include(WB_PATH.'/framework/class.secure.php');
-} elseif (file_exists($_SERVER['DOCUMENT_ROOT'].'/framework/class.secure.php')) {
-	include($_SERVER['DOCUMENT_ROOT'].'/framework/class.secure.php'); 
-} else {
-	$subs = explode('/', dirname($_SERVER['SCRIPT_NAME']));	$dir = $_SERVER['DOCUMENT_ROOT'];
-	$inc = false;
-	foreach ($subs as $sub) {
-		if (empty($sub)) continue; $dir .= '/'.$sub;
-		if (file_exists($dir.'/framework/class.secure.php')) { 
-			include($dir.'/framework/class.secure.php'); $inc = true;	break; 
-		} 
-	}
-	if (!$inc) trigger_error(sprintf("[ <b>%s</b> ] Can't include LEPTON class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
+// include LEPTON class.secure.php to protect this file and the whole CMS!
+$class_secure = '../../framework/class.secure.php';
+if (file_exists($class_secure)) {
+	include($class_secure);
 }
-// end include LEPTON class.secure.php
+else {
+	trigger_error(sprintf("[ <b>%s</b> ] Can't include LEPTON class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
+}
 
 // include language file for syncData
 if(!file_exists(WB_PATH .'/modules/'.basename(dirname(__FILE__)).'/languages/' .LANGUAGE .'.php')) {
-	// DEFAULT: use german DE language file!
-	require_once(WB_PATH .'/modules/'.basename(dirname(__FILE__)).'/languages/DE.php'); 
-	if (!defined('SYNC_DATA_LANGUAGE')) define('SYNC_DATA_LANGUAGE', 'DE');
+	require_once(WB_PATH .'/modules/'.basename(dirname(__FILE__)).'/languages/EN.php'); 
+	if (!defined('SYNC_DATA_LANGUAGE')) define('SYNC_DATA_LANGUAGE', 'EN');
 }
 else {
 	require_once(WB_PATH .'/modules/'.basename(dirname(__FILE__)).'/languages/' .LANGUAGE .'.php'); 
@@ -81,11 +71,7 @@ if (!class_exists('kitToolsLibrary')) {
 global $kitTools;
 if (!is_object($kitTools)) $kitTools = new kitToolsLibrary();
 
-if (defined('LEPTON_VERSION')) {
-	require_once WB_PATH.'/modules/pclzip/pclzip.lib.php';
-} else {
-	require_once WB_PATH.'/include/pclzip/pclzip.lib.php';
-}
+require_once WB_PATH.'/modules/pclzip/pclzip.lib.php';
 
 require_once WB_PATH.'/modules/'.basename(dirname(__FILE__)).'/class.syncdata.php';
 
@@ -418,14 +404,16 @@ class syncClient {
 	private $image_url									= '';
 	
 	const param_preset									= 'preset';
-	const param_server									= 'server';
+	//const param_server									= 'server';
 	const param_css											= 'css';
 	
 	private $params = array(
 		self::param_preset										=> 1, 
-		self::param_server										=> '',
+		//self::param_server										=> '',
 		self::param_css												=> true,
 	);
+	
+	private $server_url									= '';
 	
 	const session_server_request				= 'sync_server_request';
 	const session_server_url						= 'sync_server_url';
@@ -449,6 +437,9 @@ class syncClient {
 		$this->max_execution_time = $dbSyncDataCfg->getValue(dbSyncDataCfg::cfgMaxExecutionTime);
 		$this->limit_execution_time = $dbSyncDataCfg->getValue(dbSyncDataCfg::cfgLimitExecutionTime);
 		set_time_limit($this->max_execution_time);
+		// setting server URL
+		$server_url = $dbSyncDataCfg->getValue(dbSyncDataCfg::cfgServerURL);
+		$this->server_url = (empty($server_url)) ? WB_URL : $server_url;
 	} // __construct()
 	
 	/**
@@ -609,7 +600,8 @@ class syncClient {
   		} 
   	}
   	
-  	if (($this->params[self::param_server] == WB_URL) && (!isset($_SESSION[self::session_server_url]))) {
+  	//if (($this->params[self::param_server] == WB_URL) && (!isset($_SESSION[self::session_server_url]))) {
+  	if (($this->server_url == WB_URL) && (!isset($_SESSION[self::session_server_url]))) {
   		// don't execute the droplet at the server!
   		// it is possible that the server param is replaced by the update process, so check the session too!
   		return '<div class="sync_data_inactive"></div>';
@@ -677,7 +669,7 @@ class syncClient {
    */
   public function getURL($url) {
   	if (ini_get('allow_url_fopen') == 1) {
-  		if (false !== ($data = file_get_contents($url))) {
+  		if (false !== ($data = @file_get_contents($url))) {
   			return $data;
   		}
   		else {
@@ -713,7 +705,8 @@ class syncClient {
    * @return MIXED STR dialog on success BOOL FALSE on error
    */
 	public function dlgWelcome() {
-		if (empty($this->params[self::param_server])) {
+		//if (empty($this->params[self::param_server])) {
+		if (empty($this->server_url)) {
 			// es ist kein Server angegeben
 			$this->setError(sprintf('[%s - %s] %s', __METHOD__, __LINE__, sync_error_param_missing_server));
 			return false;
@@ -730,18 +723,20 @@ class syncClient {
 	public function checkForUpdates() {
 		global $dbSyncDataJob;
 		
-		if (!$this->checkConnection($this->params[self::param_server])) {
+		//if (!$this->checkConnection($this->params[self::param_server])) {
+		if (!$this->checkConnection($this->server_url)) {
 			// es kann keine Verbindung zu dem Server aufgebaut werden
 			$data = array(
-				'server_url'		=> $this->params[self::param_server],
+				'server_url'		=> $this->server_url, //$this->params[self::param_server],
 				'action_link'		=> sprintf('%s?%s', $this->page_link, http_build_query(array(self::request_action => self::action_check_for_updates)))
 			);
 			return $this->getTemplate('offline.lte', $data);
 		}
 		
 		// get the main params for the archive file
-		if (false ===($response = $this->getURL(sprintf('%s/modules/sync_data/response.php?%s', $this->params[self::param_server], http_build_query(array(syncServer::request_action => syncServer::action_connect)))))) {
-			$data = array('message' => sprintf(sync_msg_sync_connect, $this->page_link));
+		//if (false ===($response = $this->getURL(sprintf('%s/modules/sync_data/response.php?%s', $this->params[self::param_server], http_build_query(array(syncServer::request_action => syncServer::action_connect)))))) {
+		if (false ===($response = $this->getURL(sprintf('%s/modules/sync_data/response.php?%s', $this->server_url, http_build_query(array(syncServer::request_action => syncServer::action_connect)))))) {
+			$data = array('message' => sprintf(sync_msg_sync_connect_failed, $this->page_link));
 			return $this->getTemplate('message.lte', $data);
 		}
 		// unserialize the request
@@ -799,7 +794,7 @@ class syncClient {
 		elseif ($archive[dbSyncDataJobs::field_archive_number] < $request[syncServer::result_archive_number]) {
 			// missing one or more updates - load the next update!
 			// get the main params for the archive file
-			if (false ===($response = $this->getURL(sprintf('%s/modules/sync_data/response.php?%s', $this->params[self::param_server], 
+			if (false ===($response = $this->getURL(sprintf('%s/modules/sync_data/response.php?%s', $this->server_url, //$this->params[self::param_server], 
 										http_build_query(array(
 											syncServer::request_action => syncServer::action_info,
 											syncServer::request_archive_id => $request[syncServer::result_archive_id],
@@ -847,7 +842,7 @@ class syncClient {
 	 */
 	public function dlgExecUpdate($request) {
 		$_SESSION[self::session_server_request] = $request;
-		$_SESSION[self::session_server_url] = $this->params[self::param_server];
+		$_SESSION[self::session_server_url] = $this->server_url; //$this->params[self::param_server];
 		$data = array(
 			'action_link' => sprintf('%s?%s', $this->page_link, http_build_query(array(self::request_action => self::action_update_download))),
 			'img_url'			=> $this->image_url
@@ -864,7 +859,8 @@ class syncClient {
 		$request = $_SESSION[self::session_server_request];
 		
 		// download the archive file from syncServer to the TEMP directory
-		if (!$this->saveURL(sprintf('%s/media/sync_data/backup/%s', $this->params[self::param_server], $request[syncServer::result_archive_file]), $this->temp_path.$request[syncServer::result_archive_file])) {
+		//if (!$this->saveURL(sprintf('%s/media/sync_data/backup/%s', $this->params[self::param_server], $request[syncServer::result_archive_file]), $this->temp_path.$request[syncServer::result_archive_file])) {
+		if (!$this->saveURL(sprintf('%s/media/sync_data/backup/%s', $this->server_url, $request[syncServer::result_archive_file]), $this->temp_path.$request[syncServer::result_archive_file])) {
 			$this->setError(sprintf('[%s - %s] %s', __METHOD__, __LINE__, sprintf(sync_error_sync_download_archive_file, $reques[syncServer::result_archive_file])));
 			return false;
 		}
