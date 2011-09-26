@@ -9,15 +9,6 @@
  * @version $Id$
  */ 
 
-// include LEPTON class.secure.php to protect this file and the whole CMS!
-$class_secure = '../../../framework/class.secure.php';
-if (file_exists($class_secure)) {
-	include($class_secure);
-}
-else {
-	trigger_error(sprintf("[ <b>%s</b> ] Can't include LEPTON class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
-}
-
 define('sync_btn_abort',												'Abbruch');
 define('sync_btn_ok',														'Übernehmen');
 define('sync_btn_continue',											'Fortsetzen ...');
