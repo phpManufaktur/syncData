@@ -37,7 +37,7 @@ define('sync_desc_cfg_ignore_file_extensions',	'Files with specified extensions 
 define('sync_desc_cfg_ignore_tables',						'MySQL tables that are to be absolutly ignored by syncData. Make sure that you use only tables <b>without TABLE_PREFIX</b> (lep_, wb_ etc.)!');
 define('sync_desc_cfg_server_active',						'If you share this installation of syncData as a server, you are able to sync other syncData clients to this server.<br />0 = Server OFF, 1 = Server ON');
 define('sync_desc_cfg_server_archive_id',				'Choose the <b>ID</b> from the backup archive which should be used for synchronization.');
-define('sync_desc_cfg_server_url',							'Wenn Sie diese syncData Installation als <b>Client</b> verwenden, geben Sie hier die vollständige URL des syncData <b>Server</b> an.');
+define('sync_desc_cfg_server_url', 							'If you use this syncData installation as a <b>client</b>, enter the full URL of the syncData <b>server</b>.');
 
 define('sync_error_allow_url_fopen',						'<p>syncData requires the <b>allow_url_fopen = 1</b> setting in <b>php.ini</b> for synchronization.</p>');
 define('sync_error_archive_id_invalid',					'<p>To the archive with the ID <b>%s</b> no record was found!</p>');
