@@ -30,6 +30,7 @@ else {
 }
 
 require_once WB_PATH.'/modules/pclzip/pclzip.lib.php';
+if (!defined('PCLZIP_TEMPORARY_DIR')) define('PCLZIP_TEMPORARY_DIR', WB_PATH.'/temp/');
 
 if (!class_exists('Dwoo')) {
 	// try to load regular Dwoo
