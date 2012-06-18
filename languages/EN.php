@@ -1,13 +1,13 @@
 <?php
 /**
  * syncData
- * 
+ *
  * @author Ralf Hertsch (ralf.hertsch@phpmanufaktur.de)
  * @link http://phpmanufaktur.de
  * @copyright 2011
  * @license GNU GPL (http://www.gnu.org/licenses/gpl.html)
  * @version $Id$
- */ 
+ */
 
 define('sync_btn_abort',												'Cancel');
 define('sync_btn_ok',														'Apply');
@@ -15,7 +15,7 @@ define('sync_btn_continue',											'Continue ...');
 define('sync_btn_start',												'Start ...');
 
 define('sync_cfg_currency',											'%s €');
-define('sync_cfg_date_separator',								'.'); 
+define('sync_cfg_date_separator',								'.');
 define('sync_cfg_date_str',											'd.m.Y');
 define('sync_cfg_datetime_str',									'd.m.Y H:i');
 define('sync_cfg_day_names',										"Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday");
@@ -51,14 +51,14 @@ define('sync_error_file_copy',									'<p>The file <b>%s</b> couldn´t be copie
 define('sync_error_file_delete',								'<p>The file <b>%s</b> couldn´t be deleted.</p>');
 define('sync_error_file_get_contents',					'<p>The (<i>remote</i>)file <b>%s</b> couldn´t be read.</p>');
 define('sync_error_file_handle',								'<p>There couldn´t be created a file handle for <b>%s</b>!</p>');
-define('sync_error_file_list_invalid',					'<p>The file list is invalid..</p>'); 
+define('sync_error_file_list_invalid',					'<p>The file list is invalid..</p>');
 define('sync_error_file_list_no_files',					'<p>The file list contains no files for a restore!</p>');
 define('sync_error_file_list_no_mysql_files',		'<p>The file list doesn´t contain MySQL files!</p>');
 define('sync_error_file_not_exists',						'<p>The file <b>%s</b> doesn´t exist!</p>');
 define('sync_error_file_open',									'<p>The file <b>%s</b> couldn´t be opened!</p>');
 define('sync_error_file_put_contents',					'<p>The file <b>%s</b> couldn´t be written!</p>');
 define('sync_error_file_read',									'<p>The file <b>%s</b> couldn´t be read!</p>');
-define('sync_error_file_rename',								'<p>The file <b>%s</b> couldn´t be renamed!</p>'); 
+define('sync_error_file_rename',								'<p>The file <b>%s</b> couldn´t be renamed!</p>');
 define('sync_error_file_write',									'<p>Error writing file <b>%s</b>.</p>');
 define('sync_error_job_id_invalid',							'<p>Can not find a job with the synData ID <b>%s</b>!</p>');
 define('sync_error_mkdir',											'<p>The directory <b>%s</b> couldn´t be created!</p>');
@@ -66,16 +66,16 @@ define('sync_error_param_missing_server',				'<p>The Droplet <b>sync_client</b> 
 define('sync_error_preset_not_exists',					'<p>The preset directory <b>%s</b> does not exist, the necessary templates can not be loaded!</p>');
 define('sync_error_rmdir',											'<p>The directory <b>%s</b> couldn´t be deleted!</p>');
 define('sync_error_status_unknown',							'<p>Unknown status. Please contact the support.</p>');
-define('sync_error_sync_action_forbidden',			'<p>Invalid call! Please use only the prescribed parameters for syncData server!</p>'); 
+define('sync_error_sync_action_forbidden',			'<p>Invalid call! Please use only the prescribed parameters for syncData server!</p>');
 define('sync_error_sync_archive_filesize',			'<p>The size of the archive file %s could not be determined.</p>');
-define('sync_error_sync_archive_file_get_md5',	'<p>It couldn´t be determined MD5 checksum for the archive %s!</p>');
+define('sync_error_sync_archive_file_get_md5',	'<p>Es konnte keine MD5 Prüfsumme für das Archiv %s ermittelt werden!</p><p>Bitte <a href="%s">wiederholen Sie die Aktualisierung</a>!</p>');
 define('sync_error_sync_archive_file_missing',	'<p>The archive %s was not found!</p>');
 define('sync_error_sync_archive_id_invalid',		'<p>No valid job was found for the syncData archive with the ID <b>%s</b>!</p>');
 define('sync_error_sync_archive_id_missing',		'<p>The syncData server is active. However, there was no archive ID set for synchronization.</p>');
 define('sync_error_sync_data_corrupt',					'<p>The syncData client can access server information for archive ID <b>%s</b> but is not able to correctly assign.</p>');
 define('sync_error_sync_data_ini_missing',			'<p>The archive description <b>sync_data.ini</b> was not found!</p>');
-define('sync_error_sync_download_archive_file',	'<p>Failed to download the archive <b>%s</b> from syncData server!</p>');
-define('sync_error_sync_md5_checksum_differ',		'<p>This figure of the archive <b>%s</b> MD5 checksum is different from the default value.</p><p>The archive is invalid and is therefore discarded.</p>');
+define('sync_error_sync_download_archive_file',	'<p>Fehler beim Download des Archiv <b>%s</b> vom syncData Server!</p><p>Bitte <a href="%s">wiederholen Sie die Aktualisierung</a>!</p>');
+define('sync_error_sync_md5_checksum_differ',		'<p>Die für das Archiv <b>%s</b> ermittelte MD5 Prüfsumme weicht von dem Vorgabewert ab.</p><p>Das Archiv ist ungültig und wird verworfen.</p><p>Bitte <a href="%s">wiederholen Sie die Aktualisierung</a>!</p>');
 define('sync_error_sync_missing_initial_restore','<p>The basis of synchronization for the archive with the ID <b>%s</b> has been carried out yet on this installation. It can therefore not have any upgrade will take place.</p>');
 define('sync_error_sync_missing_keys',					'<p>The response from the syncData server is incomplete, it does not include all the expected keys!</p>');
 define('sync_error_sync_missing_params',				'<p>The request is incomplete, it was not passed all the required parameters!</p>');
@@ -90,7 +90,7 @@ define('sync_header_backup_new',								'Create a new backup of data');
 define('sync_header_backup_update',							'Update the backup of data');
 define('sync_header_cfg',												'Settings');
 define('sync_header_cfg_description',						'Explanation');
-define('sync_header_cfg_identifier',						'Setting'); 
+define('sync_header_cfg_identifier',						'Setting');
 define('sync_header_cfg_value',									'Value');
 define('sync_header_restore',										'Start restore');
 define('sync_header_restore_continue',					'Continue the restore ...');
@@ -126,12 +126,12 @@ define('sync_label_cfg_limit_execution_time',		'Limit of execution time (script)
 define('sync_label_cfg_memory_limit',						'Memory limit');
 define('sync_label_cfg_max_execution_time',			'Max execution time (script)');
 define('sync_label_cfg_server_active',					'syncData Server');
-define('sync_label_cfg_server_archive_id',			'Archive ID for synchronization'); 
+define('sync_label_cfg_server_archive_id',			'Archive ID for synchronization');
 define('sync_label_cfg_server_url',							'syncData Server URL');
 define('sync_label_files',											'Files');
 define('sync_label_restore',										'Restore');
 define('sync_label_restore_delete',							'Delete');
-define('sync_label_restore_delete_files',				'delete existing files which are not included in the archive'); 
+define('sync_label_restore_delete_files',				'delete existing files which are not included in the archive');
 define('sync_label_restore_delete_tables',			'delete existing tables which are not included in the archive');
 define('sync_label_restore_ignore',							'Ignore');
 define('sync_label_restore_ignore_config',			'config.php');
@@ -142,7 +142,7 @@ define('sync_label_restore_mode_binary',				'replace changed tables and files (b
 define('sync_label_restore_mode_replace_all',		'replace all tables and files');
 define('sync_label_restore_replace',						'Search & Replace');
 define('sync_label_restore_replace_prefix',			'update TABLE_PREFIX in MySQL tables');
-define('sync_label_restore_replace_url',				'update WB_URL in MySQL tables'); 
+define('sync_label_restore_replace_url',				'update WB_URL in MySQL tables');
 define('sync_label_restore_select',							'Choose a restore!');
 define('sync_label_status',											'Status');
 define('sync_label_tables',											'MySQL tables');
@@ -176,7 +176,7 @@ define('sync_protocol_file_delete',							'The file %s was deleted.');
 define('sync_protocol_file_replace',						'The file %s has been replaced.');
 define('sync_protocol_table_add',								'The table %s was added.');
 define('sync_protocol_table_delete',						'The table %s has been deleted');
-define('sync_protocol_table_ignored',						'The table %s has been ignored.'); 
+define('sync_protocol_table_ignored',						'The table %s has been ignored.');
 define('sync_protocol_table_replace',						'The table %s has been replaced.');
 
 define('sync_str_new_backup',										'- create new backup -');

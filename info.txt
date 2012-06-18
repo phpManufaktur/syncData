@@ -3,6 +3,16 @@ syncData
 Ralf Hertsch, Stockholmer Str. 31, 13359 Berlin (Germany)
 http://phpManufaktur.de - ralf.hertsch@phpManufaktur.de
 
+Release 0.51
+
+changed method to include pclzip (cover WB and LEPTON)
+uses now cUrl as preferred method to connect and download data from remote server
+added: if toolConfirmationLog is installed, the client will try to update the 
+  log files at the sync server.
+increased fault tolerance if downloaded archives does not pass the tests - syncData
+  now delete the archive, prompt a message and invite to retry the synchronisation
+ 
+
 Release 0.50
 2011-09-26
 published: first syncData beta release for LEPTON CMS
