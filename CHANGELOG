@@ -1,0 +1,68 @@
+### syncData
+
+Ralf Hertsch <ralf.hertsch@phpmanufaktur.de>  
+http://phpmanufaktur.de  
+(c) 2011-2012 - phpManufaktur by Ralf Hertsch  
+
+
+Release 0.51 - NOT PUBLISHED
+
+* changed method to include pclzip (cover WB and LEPTON)
+* uses now cUrl as preferred method to connect and download data from remote 
+  server
+* added: if toolConfirmationLog is installed, the client will try to update the 
+  log files at the sync server.
+* increased fault tolerance if downloaded archives does not pass the tests - 
+  syncData now delete the archive, prompt a message and invite to retry the 
+  synchronisation
+ 
+
+Release 0.50 - 2011-09-26
+
+* published: first syncData beta release for LEPTON CMS
+
+Release 0.17 - 2011-09-26
+
+* changed: no longer use the param "server" in the droplet [[sync_client]] to 
+  avoid problems while replacing URL's in the content. Tell the client the 
+  server address (URL) now in the backend configuration.
+
+Release 0.16 - 2011-09-07
+
+* fixed: missing set_time_limit() let running class.synchronize.php into a timeout.
+
+Release 0.15 - 2011-09-07
+
+* not published
+
+Release 0.14 - 2011-09-06
+
+* fixed: some typos in DE language file
+* added: droplet sync_client for synchronize local installations with an server
+
+Release 0.13 - 2011-09-02
+
+* fixed: restore process expects always tables and files for restore and causes 
+  an error if there is nothing to do
+* changed: some typos in DE language file
+
+Release 0.12 - 2011-09-01
+
+* fixed: at the backup finish message the download link does not work (missing 
+  *.zip extension)
+* changed: method of embedding helper classes dbConnect_LE, kitTools and Dwoo if 
+  they are not installed
+* changed: general code fixing and cleanup
+* fixed: problem comparing files and tables stored from a linux system with files 
+  and tables on a windows system 
+
+Release 0.11 - 2011-08-26
+
+* fixed: fallback for dbConnect_LE does not work
+* fixed: using referencing in function calls
+* added: AutoExec function enables syncData to continue processes automatically
+* fixed: Restore does not initialize proper if no backup archive exists
+
+Release 0.10 - 2011-08-25
+
+* First Beta Release
